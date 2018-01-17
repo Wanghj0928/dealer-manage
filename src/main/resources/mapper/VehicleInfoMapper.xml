@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiawawulian.dealermanage.dao.VehicleInfoMapper">
+  <resultMap id="BaseResultMap" type="com.jiawawulian.dealermanage.domain.VehicleInfo">
+    <id column="VEHICLEINFO_ID" jdbcType="VARCHAR" property="vehicleinfoId" />
+    <result column="MODEL_NAME" jdbcType="VARCHAR" property="modelName" />
+    <result column="COLOR" jdbcType="VARCHAR" property="color" />
+    <result column="DEALER_ID" jdbcType="VARCHAR" property="dealerId" />
+    <result column="BRAND_NAME" jdbcType="VARCHAR" property="brandName" />
+    <result column="VEHICLE_ID" jdbcType="VARCHAR" property="vehicleId" />
+    <result column="IMEI" jdbcType="VARCHAR" property="imei" />
+    <result column="VOLTAGE" jdbcType="VARCHAR" property="voltage" />
+    <result column="TIRE_SIZE" jdbcType="VARCHAR" property="tireSize" />
+    <result column="BUY_TIME" jdbcType="VARCHAR" property="buyTime" />
+    <result column="CAPACITY" jdbcType="VARCHAR" property="capacity" />
+    <result column="MOTOR_POWER" jdbcType="VARCHAR" property="motorPower" />
+    <result column="MAX_SPEED" jdbcType="VARCHAR" property="maxSpeed" />
+    <result column="FIRM_ID" jdbcType="VARCHAR" property="firmId" />
+    <result column="VACTIVE" jdbcType="VARCHAR" property="vactive" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.jiawawulian.dealermanage.domain.VehicleInfo">
+    <result column="FRAMENUM" jdbcType="LONGVARCHAR" property="framenum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    VEHICLEINFO_ID, MODEL_NAME, COLOR, DEALER_ID, BRAND_NAME, VEHICLE_ID, IMEI, VOLTAGE, 
+    TIRE_SIZE, BUY_TIME, CAPACITY, MOTOR_POWER, MAX_SPEED, FIRM_ID, VACTIVE
+  </sql>
+  <sql id="Blob_Column_List">
+    FRAMENUM
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from dd_vehicleinfo
+    where VEHICLEINFO_ID = #{vehicleinfoId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from dd_vehicleinfo
+    where VEHICLEINFO_ID = #{vehicleinfoId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jiawawulian.dealermanage.domain.VehicleInfo">
+    insert into dd_vehicleinfo (VEHICLEINFO_ID, MODEL_NAME, COLOR, 
+      DEALER_ID, BRAND_NAME, VEHICLE_ID, 
+      IMEI, VOLTAGE, TIRE_SIZE, 
+      BUY_TIME, CAPACITY, MOTOR_POWER, 
+      MAX_SPEED, FIRM_ID, VACTIVE, 
+      FRAMENUM)
+    values (#{vehicleinfoId,jdbcType=VARCHAR}, #{modelName,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{dealerId,jdbcType=VARCHAR}, #{brandName,jdbcType=VARCHAR}, #{vehicleId,jdbcType=VARCHAR}, 
+      #{imei,jdbcType=VARCHAR}, #{voltage,jdbcType=VARCHAR}, #{tireSize,jdbcType=VARCHAR}, 
+      #{buyTime,jdbcType=VARCHAR}, #{capacity,jdbcType=VARCHAR}, #{motorPower,jdbcType=VARCHAR}, 
+      #{maxSpeed,jdbcType=VARCHAR}, #{firmId,jdbcType=VARCHAR}, #{vactive,jdbcType=VARCHAR}, 
+      #{framenum,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiawawulian.dealermanage.domain.VehicleInfo">
+    insert into dd_vehicleinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vehicleinfoId != null">
+        VEHICLEINFO_ID,
+      </if>
+      <if test="modelName != null">
+        MODEL_NAME,
+      </if>
+      <if test="color != null">
+        COLOR,
+      </if>
+      <if test="dealerId != null">
+        DEALER_ID,
+      </if>
+      <if test="brandName != null">
+        BRAND_NAME,
+      </if>
+      <if test="vehicleId != null">
+        VEHICLE_ID,
+      </if>
+      <if test="imei != null">
+        IMEI,
+      </if>
+      <if test="voltage != null">
+        VOLTAGE,
+      </if>
+      <if test="tireSize != null">
+        TIRE_SIZE,
+      </if>
+      <if test="buyTime != null">
+        BUY_TIME,
+      </if>
+      <if test="capacity != null">
+        CAPACITY,
+      </if>
+      <if test="motorPower != null">
+        MOTOR_POWER,
+      </if>
+      <if test="maxSpeed != null">
+        MAX_SPEED,
+      </if>
+      <if test="firmId != null">
+        FIRM_ID,
+      </if>
+      <if test="vactive != null">
+        VACTIVE,
+      </if>
+      <if test="framenum != null">
+        FRAMENUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vehicleinfoId != null">
+        #{vehicleinfoId,jdbcType=VARCHAR},
+      </if>
+      <if test="modelName != null">
+        #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerId != null">
+        #{dealerId,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null">
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleId != null">
+        #{vehicleId,jdbcType=VARCHAR},
+      </if>
+      <if test="imei != null">
+        #{imei,jdbcType=VARCHAR},
+      </if>
+      <if test="voltage != null">
+        #{voltage,jdbcType=VARCHAR},
+      </if>
+      <if test="tireSize != null">
+        #{tireSize,jdbcType=VARCHAR},
+      </if>
+      <if test="buyTime != null">
+        #{buyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="capacity != null">
+        #{capacity,jdbcType=VARCHAR},
+      </if>
+      <if test="motorPower != null">
+        #{motorPower,jdbcType=VARCHAR},
+      </if>
+      <if test="maxSpeed != null">
+        #{maxSpeed,jdbcType=VARCHAR},
+      </if>
+      <if test="firmId != null">
+        #{firmId,jdbcType=VARCHAR},
+      </if>
+      <if test="vactive != null">
+        #{vactive,jdbcType=VARCHAR},
+      </if>
+      <if test="framenum != null">
+        #{framenum,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiawawulian.dealermanage.domain.VehicleInfo">
+    update dd_vehicleinfo
+    <set>
+      <if test="modelName != null">
+        MODEL_NAME = #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        COLOR = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerId != null">
+        DEALER_ID = #{dealerId,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null">
+        BRAND_NAME = #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleId != null">
+        VEHICLE_ID = #{vehicleId,jdbcType=VARCHAR},
+      </if>
+      <if test="imei != null">
+        IMEI = #{imei,jdbcType=VARCHAR},
+      </if>
+      <if test="voltage != null">
+        VOLTAGE = #{voltage,jdbcType=VARCHAR},
+      </if>
+      <if test="tireSize != null">
+        TIRE_SIZE = #{tireSize,jdbcType=VARCHAR},
+      </if>
+      <if test="buyTime != null">
+        BUY_TIME = #{buyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="capacity != null">
+        CAPACITY = #{capacity,jdbcType=VARCHAR},
+      </if>
+      <if test="motorPower != null">
+        MOTOR_POWER = #{motorPower,jdbcType=VARCHAR},
+      </if>
+      <if test="maxSpeed != null">
+        MAX_SPEED = #{maxSpeed,jdbcType=VARCHAR},
+      </if>
+      <if test="firmId != null">
+        FIRM_ID = #{firmId,jdbcType=VARCHAR},
+      </if>
+      <if test="vactive != null">
+        VACTIVE = #{vactive,jdbcType=VARCHAR},
+      </if>
+      <if test="framenum != null">
+        FRAMENUM = #{framenum,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where VEHICLEINFO_ID = #{vehicleinfoId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jiawawulian.dealermanage.domain.VehicleInfo">
+    update dd_vehicleinfo
+    set MODEL_NAME = #{modelName,jdbcType=VARCHAR},
+      COLOR = #{color,jdbcType=VARCHAR},
+      DEALER_ID = #{dealerId,jdbcType=VARCHAR},
+      BRAND_NAME = #{brandName,jdbcType=VARCHAR},
+      VEHICLE_ID = #{vehicleId,jdbcType=VARCHAR},
+      IMEI = #{imei,jdbcType=VARCHAR},
+      VOLTAGE = #{voltage,jdbcType=VARCHAR},
+      TIRE_SIZE = #{tireSize,jdbcType=VARCHAR},
+      BUY_TIME = #{buyTime,jdbcType=VARCHAR},
+      CAPACITY = #{capacity,jdbcType=VARCHAR},
+      MOTOR_POWER = #{motorPower,jdbcType=VARCHAR},
+      MAX_SPEED = #{maxSpeed,jdbcType=VARCHAR},
+      FIRM_ID = #{firmId,jdbcType=VARCHAR},
+      VACTIVE = #{vactive,jdbcType=VARCHAR},
+      FRAMENUM = #{framenum,jdbcType=LONGVARCHAR}
+    where VEHICLEINFO_ID = #{vehicleinfoId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jiawawulian.dealermanage.domain.VehicleInfo">
+    update dd_vehicleinfo
+    set MODEL_NAME = #{modelName,jdbcType=VARCHAR},
+      COLOR = #{color,jdbcType=VARCHAR},
+      DEALER_ID = #{dealerId,jdbcType=VARCHAR},
+      BRAND_NAME = #{brandName,jdbcType=VARCHAR},
+      VEHICLE_ID = #{vehicleId,jdbcType=VARCHAR},
+      IMEI = #{imei,jdbcType=VARCHAR},
+      VOLTAGE = #{voltage,jdbcType=VARCHAR},
+      TIRE_SIZE = #{tireSize,jdbcType=VARCHAR},
+      BUY_TIME = #{buyTime,jdbcType=VARCHAR},
+      CAPACITY = #{capacity,jdbcType=VARCHAR},
+      MOTOR_POWER = #{motorPower,jdbcType=VARCHAR},
+      MAX_SPEED = #{maxSpeed,jdbcType=VARCHAR},
+      FIRM_ID = #{firmId,jdbcType=VARCHAR},
+      VACTIVE = #{vactive,jdbcType=VARCHAR}
+    where VEHICLEINFO_ID = #{vehicleinfoId,jdbcType=VARCHAR}
+  </update>
+</mapper>

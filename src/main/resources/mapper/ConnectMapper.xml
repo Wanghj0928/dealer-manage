@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiawawulian.dealermanage.dao.ConnectMapper">
+  <resultMap id="BaseResultMap" type="com.jiawawulian.dealermanage.domain.Connect">
+    <id column="CONNECT_ID" jdbcType="VARCHAR" property="connectId" />
+    <result column="DEALER_ID" jdbcType="VARCHAR" property="dealerId" />
+    <result column="ASSISTANT_ID" jdbcType="VARCHAR" property="assistantId" />
+    <result column="IS_DELETE" jdbcType="TINYINT" property="isDelete" />
+    <result column="CAN_PUSH" jdbcType="TINYINT" property="canPush" />
+    <result column="CAN_LOOK" jdbcType="TINYINT" property="canLook" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CONNECT_ID, DEALER_ID, ASSISTANT_ID, IS_DELETE, CAN_PUSH, CAN_LOOK
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dd_connect
+    where CONNECT_ID = #{connectId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from dd_connect
+    where CONNECT_ID = #{connectId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jiawawulian.dealermanage.domain.Connect">
+    insert into dd_connect (CONNECT_ID, DEALER_ID, ASSISTANT_ID, 
+      IS_DELETE, CAN_PUSH, CAN_LOOK
+      )
+    values (#{connectId,jdbcType=VARCHAR}, #{dealerId,jdbcType=VARCHAR}, #{assistantId,jdbcType=VARCHAR}, 
+      #{isDelete,jdbcType=TINYINT}, #{canPush,jdbcType=TINYINT}, #{canLook,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiawawulian.dealermanage.domain.Connect">
+    insert into dd_connect
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="connectId != null">
+        CONNECT_ID,
+      </if>
+      <if test="dealerId != null">
+        DEALER_ID,
+      </if>
+      <if test="assistantId != null">
+        ASSISTANT_ID,
+      </if>
+      <if test="isDelete != null">
+        IS_DELETE,
+      </if>
+      <if test="canPush != null">
+        CAN_PUSH,
+      </if>
+      <if test="canLook != null">
+        CAN_LOOK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="connectId != null">
+        #{connectId,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerId != null">
+        #{dealerId,jdbcType=VARCHAR},
+      </if>
+      <if test="assistantId != null">
+        #{assistantId,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="canPush != null">
+        #{canPush,jdbcType=TINYINT},
+      </if>
+      <if test="canLook != null">
+        #{canLook,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiawawulian.dealermanage.domain.Connect">
+    update dd_connect
+    <set>
+      <if test="dealerId != null">
+        DEALER_ID = #{dealerId,jdbcType=VARCHAR},
+      </if>
+      <if test="assistantId != null">
+        ASSISTANT_ID = #{assistantId,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        IS_DELETE = #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="canPush != null">
+        CAN_PUSH = #{canPush,jdbcType=TINYINT},
+      </if>
+      <if test="canLook != null">
+        CAN_LOOK = #{canLook,jdbcType=TINYINT},
+      </if>
+    </set>
+    where CONNECT_ID = #{connectId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jiawawulian.dealermanage.domain.Connect">
+    update dd_connect
+    set DEALER_ID = #{dealerId,jdbcType=VARCHAR},
+      ASSISTANT_ID = #{assistantId,jdbcType=VARCHAR},
+      IS_DELETE = #{isDelete,jdbcType=TINYINT},
+      CAN_PUSH = #{canPush,jdbcType=TINYINT},
+      CAN_LOOK = #{canLook,jdbcType=TINYINT}
+    where CONNECT_ID = #{connectId,jdbcType=VARCHAR}
+  </update>
+</mapper>

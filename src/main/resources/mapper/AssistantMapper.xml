@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiawawulian.dealermanage.dao.AssistantMapper">
+  <resultMap id="BaseResultMap" type="com.jiawawulian.dealermanage.domain.Assistant">
+    <id column="ASSISTANT_ID" jdbcType="VARCHAR" property="assistantId" />
+    <result column="ASSISTANT_NAME" jdbcType="VARCHAR" property="assistantName" />
+    <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="IS_DELETE" jdbcType="BIT" property="isDelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ASSISTANT_ID, ASSISTANT_NAME, USERNAME, PASSWORD, PHONE, IS_DELETE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dd_assistant
+    where ASSISTANT_ID = #{assistantId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from dd_assistant
+    where ASSISTANT_ID = #{assistantId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jiawawulian.dealermanage.domain.Assistant">
+    insert into dd_assistant (ASSISTANT_ID, ASSISTANT_NAME, USERNAME, 
+      PASSWORD, PHONE, IS_DELETE
+      )
+    values (#{assistantId,jdbcType=VARCHAR}, #{assistantName,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{isDelete,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiawawulian.dealermanage.domain.Assistant">
+    insert into dd_assistant
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="assistantId != null">
+        ASSISTANT_ID,
+      </if>
+      <if test="assistantName != null">
+        ASSISTANT_NAME,
+      </if>
+      <if test="username != null">
+        USERNAME,
+      </if>
+      <if test="password != null">
+        PASSWORD,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="isDelete != null">
+        IS_DELETE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="assistantId != null">
+        #{assistantId,jdbcType=VARCHAR},
+      </if>
+      <if test="assistantName != null">
+        #{assistantName,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiawawulian.dealermanage.domain.Assistant">
+    update dd_assistant
+    <set>
+      <if test="assistantName != null">
+        ASSISTANT_NAME = #{assistantName,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        IS_DELETE = #{isDelete,jdbcType=BIT},
+      </if>
+    </set>
+    where ASSISTANT_ID = #{assistantId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jiawawulian.dealermanage.domain.Assistant">
+    update dd_assistant
+    set ASSISTANT_NAME = #{assistantName,jdbcType=VARCHAR},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      IS_DELETE = #{isDelete,jdbcType=BIT}
+    where ASSISTANT_ID = #{assistantId,jdbcType=VARCHAR}
+  </update>
+</mapper>
