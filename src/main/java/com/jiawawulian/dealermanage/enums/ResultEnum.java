@@ -14,7 +14,8 @@ public enum ResultEnum implements CodeEnum{
     SMS_CODE_INVALID(15, "验证码无效"),
     SMS_CODE_EMPTY(16, "验证码不能为空"),
     SMS_CODE_ERROR(17, "验证码错误"),
-    LOGIN_SUCCESS(18, "登录成功")
+    LOGIN_SUCCESS(18, "登录成功"),
+    DEALERID_EMPTY(19, " 经销商id为空")
     ;
 
     private Integer code;

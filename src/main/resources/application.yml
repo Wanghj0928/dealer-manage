@@ -11,8 +11,8 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-  jackson:
-    default-property-inclusion: non_null
+#  jackson:
+#    default-property-inclusion: non_null
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml

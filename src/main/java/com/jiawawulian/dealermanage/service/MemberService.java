@@ -1,12 +1,14 @@
-package com.jiawawulian.dealermanage.dao;
+package com.jiawawulian.dealermanage.service;
 
 import com.jiawawulian.dealermanage.domain.Member;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
-public interface MemberMapper {
+/**
+ * @author wanghj
+ * @create 2018-01-18 9:42
+ **/
+public interface MemberService {
 
     /**
      * 根据memberId查询详细的会员信息

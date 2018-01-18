@@ -1,16 +1,15 @@
-package com.jiawawulian.dealermanage.dao;
+package com.jiawawulian.dealermanage.service;
 
 import com.jiawawulian.dealermanage.domain.Breakdown;
 import com.jiawawulian.dealermanage.dto.BreakdownDTO;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * @author wanghj
- */
-@Component
-public interface BreakdownMapper {
+ * @create 2018-01-18 12:57
+ **/
+public interface BreakdownService {
 
     /**
      * 根据breakdownId查询breakdown信息

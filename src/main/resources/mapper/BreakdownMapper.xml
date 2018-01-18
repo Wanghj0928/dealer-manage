@@ -13,184 +13,33 @@
     <result column="VEHICLE_ID" jdbcType="VARCHAR" property="vehicleId" />
     <result column="TYPE" jdbcType="VARCHAR" property="type" />
     <result column="PICTURE_NAME" jdbcType="VARCHAR" property="pictureName" />
+    <result column="READSTATE" jdbcType="VARCHAR" property="readstate" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.jiawawulian.dealermanage.domain.Breakdown">
-    <result column="READSTATE" jdbcType="LONGVARCHAR" property="readstate" />
+  <resultMap id="BaseResultDTOMap" extends="BaseResultMap" type="com.jiawawulian.dealermanage.dto.BreakdownDTO">
+    <result column="FIRM_NAME" jdbcType="VARCHAR" property="firmName" />
   </resultMap>
   <sql id="Base_Column_List">
     BREAKDOWNS_ID, MEMBER_ID, CONTENT, PHONE, LAT, LON, LOCATION, RECORD_DATE, VEHICLE_ID, 
-    TYPE, PICTURE_NAME
+    TYPE, PICTURE_NAME, READSTATE
   </sql>
-  <sql id="Blob_Column_List">
-    READSTATE
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from dd_breakdown
     where BREAKDOWNS_ID = #{breakdownsId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from dd_breakdown
-    where BREAKDOWNS_ID = #{breakdownsId,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="com.jiawawulian.dealermanage.domain.Breakdown">
-    insert into dd_breakdown (BREAKDOWNS_ID, MEMBER_ID, CONTENT, 
-      PHONE, LAT, LON, LOCATION, 
-      RECORD_DATE, VEHICLE_ID, TYPE, 
-      PICTURE_NAME, READSTATE)
-    values (#{breakdownsId,jdbcType=VARCHAR}, #{memberId,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{lat,jdbcType=VARCHAR}, #{lon,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, 
-      #{recordDate,jdbcType=VARCHAR}, #{vehicleId,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
-      #{pictureName,jdbcType=VARCHAR}, #{readstate,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.jiawawulian.dealermanage.domain.Breakdown">
-    insert into dd_breakdown
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="breakdownsId != null">
-        BREAKDOWNS_ID,
-      </if>
-      <if test="memberId != null">
-        MEMBER_ID,
-      </if>
-      <if test="content != null">
-        CONTENT,
-      </if>
-      <if test="phone != null">
-        PHONE,
-      </if>
-      <if test="lat != null">
-        LAT,
-      </if>
-      <if test="lon != null">
-        LON,
-      </if>
-      <if test="location != null">
-        LOCATION,
-      </if>
-      <if test="recordDate != null">
-        RECORD_DATE,
-      </if>
-      <if test="vehicleId != null">
-        VEHICLE_ID,
-      </if>
-      <if test="type != null">
-        TYPE,
-      </if>
-      <if test="pictureName != null">
-        PICTURE_NAME,
-      </if>
-      <if test="readstate != null">
-        READSTATE,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="breakdownsId != null">
-        #{breakdownsId,jdbcType=VARCHAR},
-      </if>
-      <if test="memberId != null">
-        #{memberId,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="lat != null">
-        #{lat,jdbcType=VARCHAR},
-      </if>
-      <if test="lon != null">
-        #{lon,jdbcType=VARCHAR},
-      </if>
-      <if test="location != null">
-        #{location,jdbcType=VARCHAR},
-      </if>
-      <if test="recordDate != null">
-        #{recordDate,jdbcType=VARCHAR},
-      </if>
-      <if test="vehicleId != null">
-        #{vehicleId,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="pictureName != null">
-        #{pictureName,jdbcType=VARCHAR},
-      </if>
-      <if test="readstate != null">
-        #{readstate,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jiawawulian.dealermanage.domain.Breakdown">
-    update dd_breakdown
-    <set>
-      <if test="memberId != null">
-        MEMBER_ID = #{memberId,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null">
-        CONTENT = #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        PHONE = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="lat != null">
-        LAT = #{lat,jdbcType=VARCHAR},
-      </if>
-      <if test="lon != null">
-        LON = #{lon,jdbcType=VARCHAR},
-      </if>
-      <if test="location != null">
-        LOCATION = #{location,jdbcType=VARCHAR},
-      </if>
-      <if test="recordDate != null">
-        RECORD_DATE = #{recordDate,jdbcType=VARCHAR},
-      </if>
-      <if test="vehicleId != null">
-        VEHICLE_ID = #{vehicleId,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        TYPE = #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="pictureName != null">
-        PICTURE_NAME = #{pictureName,jdbcType=VARCHAR},
-      </if>
-      <if test="readstate != null">
-        READSTATE = #{readstate,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where BREAKDOWNS_ID = #{breakdownsId,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jiawawulian.dealermanage.domain.Breakdown">
-    update dd_breakdown
-    set MEMBER_ID = #{memberId,jdbcType=VARCHAR},
-      CONTENT = #{content,jdbcType=VARCHAR},
-      PHONE = #{phone,jdbcType=VARCHAR},
-      LAT = #{lat,jdbcType=VARCHAR},
-      LON = #{lon,jdbcType=VARCHAR},
-      LOCATION = #{location,jdbcType=VARCHAR},
-      RECORD_DATE = #{recordDate,jdbcType=VARCHAR},
-      VEHICLE_ID = #{vehicleId,jdbcType=VARCHAR},
-      TYPE = #{type,jdbcType=VARCHAR},
-      PICTURE_NAME = #{pictureName,jdbcType=VARCHAR},
-      READSTATE = #{readstate,jdbcType=LONGVARCHAR}
-    where BREAKDOWNS_ID = #{breakdownsId,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.jiawawulian.dealermanage.domain.Breakdown">
-    update dd_breakdown
-    set MEMBER_ID = #{memberId,jdbcType=VARCHAR},
-      CONTENT = #{content,jdbcType=VARCHAR},
-      PHONE = #{phone,jdbcType=VARCHAR},
-      LAT = #{lat,jdbcType=VARCHAR},
-      LON = #{lon,jdbcType=VARCHAR},
-      LOCATION = #{location,jdbcType=VARCHAR},
-      RECORD_DATE = #{recordDate,jdbcType=VARCHAR},
-      VEHICLE_ID = #{vehicleId,jdbcType=VARCHAR},
-      TYPE = #{type,jdbcType=VARCHAR},
-      PICTURE_NAME = #{pictureName,jdbcType=VARCHAR}
-    where BREAKDOWNS_ID = #{breakdownsId,jdbcType=VARCHAR}
-  </update>
+
+  <select id="selectByDealerId" parameterType="java.lang.String" resultMap="BaseResultDTOMap">
+    SELECT
+        b.*,
+        f.FIRM_NAME
+    FROM
+        dd_breakdown b,
+        dd_vehicleinfo v,
+        dd_firm f
+    WHERE
+        v.DEALER_ID = #{dealerId,jdbcType=VARCHAR}
+    AND v.VEHICLE_ID = b.VEHICLE_ID
+    AND f.FIRM_ID = v.FIRM_ID
+  </select>
 </mapper>

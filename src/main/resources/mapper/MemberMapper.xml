@@ -23,131 +23,20 @@
     from dd_member
     where MEMBER_ID = #{memberId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from dd_member
-    where MEMBER_ID = #{memberId,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="com.jiawawulian.dealermanage.domain.Member">
-    insert into dd_member (MEMBER_ID, USER_NAME, REAL_NAME, 
-      PASSWORD, PHONE, PHONE_TYPE, 
-      REGISTER_TIME, SOFTWARE_TYPE, REMARK, 
-      SESSION_ID)
-    values (#{memberId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{phoneType,jdbcType=VARCHAR}, 
-      #{registerTime,jdbcType=VARCHAR}, #{softwareType,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{sessionId,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.jiawawulian.dealermanage.domain.Member">
-    insert into dd_member
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="memberId != null">
-        MEMBER_ID,
-      </if>
-      <if test="userName != null">
-        USER_NAME,
-      </if>
-      <if test="realName != null">
-        REAL_NAME,
-      </if>
-      <if test="password != null">
-        PASSWORD,
-      </if>
-      <if test="phone != null">
-        PHONE,
-      </if>
-      <if test="phoneType != null">
-        PHONE_TYPE,
-      </if>
-      <if test="registerTime != null">
-        REGISTER_TIME,
-      </if>
-      <if test="softwareType != null">
-        SOFTWARE_TYPE,
-      </if>
-      <if test="remark != null">
-        REMARK,
-      </if>
-      <if test="sessionId != null">
-        SESSION_ID,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="memberId != null">
-        #{memberId,jdbcType=VARCHAR},
-      </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="realName != null">
-        #{realName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="phoneType != null">
-        #{phoneType,jdbcType=VARCHAR},
-      </if>
-      <if test="registerTime != null">
-        #{registerTime,jdbcType=VARCHAR},
-      </if>
-      <if test="softwareType != null">
-        #{softwareType,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="sessionId != null">
-        #{sessionId,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jiawawulian.dealermanage.domain.Member">
-    update dd_member
-    <set>
-      <if test="userName != null">
-        USER_NAME = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="realName != null">
-        REAL_NAME = #{realName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        PASSWORD = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        PHONE = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="phoneType != null">
-        PHONE_TYPE = #{phoneType,jdbcType=VARCHAR},
-      </if>
-      <if test="registerTime != null">
-        REGISTER_TIME = #{registerTime,jdbcType=VARCHAR},
-      </if>
-      <if test="softwareType != null">
-        SOFTWARE_TYPE = #{softwareType,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        REMARK = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="sessionId != null">
-        SESSION_ID = #{sessionId,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where MEMBER_ID = #{memberId,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.jiawawulian.dealermanage.domain.Member">
-    update dd_member
-    set USER_NAME = #{userName,jdbcType=VARCHAR},
-      REAL_NAME = #{realName,jdbcType=VARCHAR},
-      PASSWORD = #{password,jdbcType=VARCHAR},
-      PHONE = #{phone,jdbcType=VARCHAR},
-      PHONE_TYPE = #{phoneType,jdbcType=VARCHAR},
-      REGISTER_TIME = #{registerTime,jdbcType=VARCHAR},
-      SOFTWARE_TYPE = #{softwareType,jdbcType=VARCHAR},
-      REMARK = #{remark,jdbcType=VARCHAR},
-      SESSION_ID = #{sessionId,jdbcType=VARCHAR}
-    where MEMBER_ID = #{memberId,jdbcType=VARCHAR}
-  </update>
+
+  <select id="selectListByDealerId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+    m.*
+    FROM
+        dd_member m,
+        dd_vehicleinfo v,
+        dd_connect c
+    WHERE
+        v.DEALER_ID = #{dealerId, jdbcType=VARCHAR}
+    AND c.VEHICLE_ID = v.VEHICLE_ID
+    AND C.MEMBER_ID = M.MEMBER_ID
+    AND ROLE = 1
+    AND ACTIVE = 1
+  </select>
+
 </mapper>

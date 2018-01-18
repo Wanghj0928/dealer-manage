@@ -1,11 +1,12 @@
-package com.jiawawulian.dealermanage.dao;
+package com.jiawawulian.dealermanage.service;
 
 import com.jiawawulian.dealermanage.domain.Dealer;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Component;
 
-@Component
-public interface DealerMapper {
+/**
+ * @author wanghj
+ * @create 2018-01-18 9:09
+ **/
+public interface DealerService {
 
     /**
      * 根据dealerId查找dealer
@@ -22,5 +23,5 @@ public interface DealerMapper {
      * @param password
      * @return
      */
-    Dealer selectByUsernameAndPassword(String username, String password);
+    Boolean checkNameAndPass(String username, String password);
 }
