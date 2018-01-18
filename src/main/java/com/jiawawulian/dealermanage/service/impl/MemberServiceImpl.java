@@ -27,4 +27,9 @@ public class MemberServiceImpl implements MemberService {
     public List<Member> selectListByDealerId(String dealerId) {
         return memberMapper.selectListByDealerId(dealerId);
     }
+
+    @Override
+    public List<Member> selectByDealerIdAndBrandName(String dealerId, String brandName) {
+        return memberMapper.selectByDealerIdAndBrandName(dealerId, brandName);
+    }
 }

@@ -46,6 +46,6 @@ public class SendSMSController {
         long generatorDate = System.currentTimeMillis();
         SingletonSMSEnum.INSTANCE.addDateSession(phone, generatorDate);
         log.info("【短信发送结果】: " + resultStr);
-        return ResultVOUtil.success(ResultEnum.SMS_SEND_SUCCESS.getCode(), ResultEnum.SMS_SEND_SUCCESS.getMessage());
+        return ResultVOUtil.success(0, ResultEnum.SMS_SEND_SUCCESS.getMessage());
     }
 }

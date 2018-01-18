@@ -25,11 +25,13 @@ public class MemberController {
     private MemberService memberService;
 
     @RequestMapping("/member/list")
-    public ResultVO getMemberList(@RequestParam("dealerId") String dealerId) {
-        if(StringUtils.isEmpty(dealerId)) {
-            return ResultVOUtil.error(ResultEnum.DEALERID_EMPTY.getCode(), ResultEnum.DEALERID_EMPTY.getMessage());
+    public ResultVO getMemberList(@RequestParam("dealerId") String dealerId, @RequestParam(value = "brandName", required = false) String brandName) {
+        List<Member> memberList = null;
+        if (!StringUtils.isEmpty(brandName)) {
+            memberList = memberService.selectByDealerIdAndBrandName(dealerId, brandName);
+        } else {
+            memberList = memberService.selectListByDealerId(dealerId);
         }
-        List<Member> memberList = memberService.selectListByDealerId(dealerId);
         HashMap map = new HashMap(1);
         map.put("memberList", memberList);
         return ResultVOUtil.success(map);

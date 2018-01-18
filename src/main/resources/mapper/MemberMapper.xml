@@ -30,13 +30,28 @@
     FROM
         dd_member m,
         dd_vehicleinfo v,
-        dd_connect c
+        gprs_connect c
     WHERE
         v.DEALER_ID = #{dealerId, jdbcType=VARCHAR}
-    AND c.VEHICLE_ID = v.VEHICLE_ID
+    AND c.IMEI = v.IMEI
     AND C.MEMBER_ID = M.MEMBER_ID
     AND ROLE = 1
     AND ACTIVE = 1
   </select>
 
+  <select id="selectByDealerIdAndBrandName" resultMap="BaseResultMap">
+    SELECT
+    m.*
+    FROM
+      dd_member m,
+      dd_vehicleinfo v,
+      gprs_connect c
+    WHERE
+      v.DEALER_ID = #{arg0}
+    AND v.BRAND_NAME = #{arg1}
+    AND c.IMEI = v.IMEI
+    AND C.MEMBER_ID = M.MEMBER_ID
+    AND ROLE = 1
+    AND ACTIVE = 1
+  </select>
 </mapper>

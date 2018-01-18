@@ -21,4 +21,12 @@ public interface MemberMapper {
      * @return
      */
     List<Member> selectListByDealerId(String dealerId);
+
+    /**
+     * 根据dealerId和brandName查询会员
+     * @param dealerId
+     * @param brandName
+     * @return
+     */
+    List<Member> selectByDealerIdAndBrandName(String dealerId, String brandName);
 }

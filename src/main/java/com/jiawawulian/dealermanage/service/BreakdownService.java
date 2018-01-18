@@ -24,4 +24,6 @@ public interface BreakdownService {
      * @return
      */
     List<BreakdownDTO> selectByDealerId(String dealerId);
+
+
 }
