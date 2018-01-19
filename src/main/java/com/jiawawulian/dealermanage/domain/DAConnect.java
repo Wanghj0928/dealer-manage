@@ -1,18 +1,20 @@
 package com.jiawawulian.dealermanage.domain;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.Date;
 
 @Data
-public class Connect {
-    private String connectId;
+@DynamicUpdate
+public class DAConnect {
+    private String daconnectId;
 
     private String dealerId;
 
-    private String assistantId;
+    private String parentId;
 
-    private Boolean active;
+    private Boolean active = true;
 
     private Date createTime;
 

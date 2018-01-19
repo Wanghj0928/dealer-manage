@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiawawulian.dealermanage.dao.DAConnectMapper">
+  <resultMap id="BaseResultMap" type="com.jiawawulian.dealermanage.domain.Dealer">
+    <id column="DEALER_ID" jdbcType="VARCHAR" property="dealerId" />
+    <result column="LAT" jdbcType="VARCHAR" property="lat" />
+    <result column="LON" jdbcType="VARCHAR" property="lon" />
+    <result column="LOCATION" jdbcType="VARCHAR" property="location" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="ROLE" jdbcType="VARCHAR" property="role" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    DEALER_ID, LAT, LON, LOCATION, PHONE, USERNAME, PASSWORD, ROLE
+  </sql>
+
+  <resultMap id="BaseResultMap2" type="com.jiawawulian.dealermanage.domain.DAConnect">
+    <id column="DACONNECT_ID" jdbcType="VARCHAR" property="daconnectId" />
+    <result column="DEALER_ID" jdbcType="VARCHAR" property="dealerId" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="ACTIVE" jdbcType="VARCHAR" property="active" />
+    <result column="CREATE_TIME" jdbcType="VARCHAR" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="VARCHAR" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List2">
+    DACONNECT_ID, DEALER_ID, PARENT_ID, ACTIVE, CREATE_TIME, UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap2">
+    select 
+    <include refid="Base_Column_List2" />
+    from dd_da_connect
+    where DACONNECT_ID = #{daconnectId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByParentId" resultMap="BaseResultMap">
+    select
+    d.*
+    from dd_da_connect c
+    JOIN dd_dealer d ON c.PARENT_ID = #{arg0}
+    AND c.active = #{arg1}
+    AND c.dealer_id = d.dealer_id
+
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from dd_da_connect
+    where DACONNECT_ID = #{daconnectId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jiawawulian.dealermanage.domain.DAConnect">
+    insert into dd_da_connect (DACONNECT_ID, DEALER_ID, PARENT_ID, 
+      ACTIVE, CREATE_TIME, UPDATE_TIME
+      )
+    values (#{daconnectId,jdbcType=VARCHAR}, #{dealerId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, 
+      #{active,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiawawulian.dealermanage.domain.DAConnect">
+    insert into dd_da_connect
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="daconnectId != null">
+        DACONNECT_ID,
+      </if>
+      <if test="dealerId != null">
+        DEALER_ID,
+      </if>
+      <if test="parentId != null">
+        PARENT_ID,
+      </if>
+      <if test="active != null">
+        ACTIVE,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="daconnectId != null">
+        #{daconnectId,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerId != null">
+        #{dealerId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null">
+        #{active,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiawawulian.dealermanage.domain.DAConnect">
+    update dd_da_connect
+    <set>
+      <if test="dealerId != null">
+        DEALER_ID = #{dealerId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null">
+        ACTIVE = #{active,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where DACONNECT_ID = #{daconnectId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jiawawulian.dealermanage.domain.DAConnect">
+    update dd_da_connect
+    set ACTIVE = #{active,jdbcType=BOOLEAN}
+    where DACONNECT_ID = #{daconnectId,jdbcType=VARCHAR}
+  </update>
+</mapper>

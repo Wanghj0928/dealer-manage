@@ -32,4 +32,9 @@ public class DealerServiceImpl implements DealerService {
             return true;
         }
     }
+
+    @Override
+    public int insert(Dealer dealer) {
+        return dealerMapper.insert(dealer);
+    }
 }

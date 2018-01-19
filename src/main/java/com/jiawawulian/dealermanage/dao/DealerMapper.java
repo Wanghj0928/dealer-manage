@@ -1,17 +1,34 @@
 package com.jiawawulian.dealermanage.dao;
 
 import com.jiawawulian.dealermanage.domain.Dealer;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface DealerMapper {
-    int deleteByPrimaryKey(String dealerId);
 
-    int insert(Dealer record);
-
-    int insertSelective(Dealer record);
-
+    /**
+     * 根据dealerId查找dealer
+     *
+     * @param dealerId
+     * @return
+     */
     Dealer selectByPrimaryKey(String dealerId);
 
-    int updateByPrimaryKeySelective(Dealer record);
+    /**
+     * 根据用户名和密码查找dealer，用于账号密码登录
+     *
+     * @param username
+     * @param password
+     * @return
+     */
+    Dealer selectByUsernameAndPassword(String username, String password);
 
-    int updateByPrimaryKey(Dealer record);
+    /**
+     * 插入dealer对象
+     *
+     * @param dealer
+     * @return
+     */
+    int insert(Dealer dealer);
+
 }

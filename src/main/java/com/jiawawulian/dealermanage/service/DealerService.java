@@ -24,4 +24,12 @@ public interface DealerService {
      * @return
      */
     Boolean checkNameAndPass(String username, String password);
+
+    /**
+     * 插入dealer对象
+     *
+     * @param dealer
+     * @return
+     */
+    int insert(Dealer dealer);
 }

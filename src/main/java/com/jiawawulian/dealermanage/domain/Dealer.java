@@ -1,5 +1,8 @@
 package com.jiawawulian.dealermanage.domain;
 
+import lombok.Data;
+
+@Data
 public class Dealer {
     private String dealerId;
 
@@ -13,61 +16,8 @@ public class Dealer {
 
     private String username;
 
-    private String password;
+    private String password = "123456";
 
-    public String getDealerId() {
-        return dealerId;
-    }
+    private Integer role = 0;
 
-    public void setDealerId(String dealerId) {
-        this.dealerId = dealerId == null ? null : dealerId.trim();
-    }
-
-    public String getLat() {
-        return lat;
-    }
-
-    public void setLat(String lat) {
-        this.lat = lat == null ? null : lat.trim();
-    }
-
-    public String getLon() {
-        return lon;
-    }
-
-    public void setLon(String lon) {
-        this.lon = lon == null ? null : lon.trim();
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location == null ? null : location.trim();
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
 }
