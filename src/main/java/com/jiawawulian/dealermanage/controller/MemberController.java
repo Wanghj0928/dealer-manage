@@ -2,7 +2,6 @@ package com.jiawawulian.dealermanage.controller;
 
 import com.jiawawulian.dealermanage.VO.ResultVO;
 import com.jiawawulian.dealermanage.domain.Member;
-import com.jiawawulian.dealermanage.enums.ResultEnum;
 import com.jiawawulian.dealermanage.service.MemberService;
 import com.jiawawulian.dealermanage.utils.ResultVOUtil;
 import org.apache.commons.lang.StringUtils;

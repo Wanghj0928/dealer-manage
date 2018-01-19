@@ -19,6 +19,119 @@
     from dd_dealer
     where DEALER_ID = #{dealerId,jdbcType=VARCHAR}
   </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from dd_dealer
+    where DEALER_ID = #{dealerId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jiawawulian.dealermanage.domain.Dealer">
+    insert into dd_dealer (DEALER_ID, LAT, LON, 
+      LOCATION, PHONE, USERNAME, 
+      PASSWORD)
+    values (#{dealerId,jdbcType=VARCHAR}, #{lat,jdbcType=VARCHAR}, #{lon,jdbcType=VARCHAR}, 
+      #{location,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiawawulian.dealermanage.domain.Dealer">
+    insert into dd_dealer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dealerId != null">
+        DEALER_ID,
+      </if>
+      <if test="lat != null">
+        LAT,
+      </if>
+      <if test="lon != null">
+        LON,
+      </if>
+      <if test="location != null">
+        LOCATION,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="username != null">
+        USERNAME,
+      </if>
+      <if test="password != null">
+        PASSWORD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dealerId != null">
+        #{dealerId,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null">
+        #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="lon != null">
+        #{lon,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiawawulian.dealermanage.domain.Dealer">
+    update dd_dealer
+    <set>
+      <if test="lat != null">
+        LAT = #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="lon != null">
+        LON = #{lon,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        LOCATION = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DEALER_ID = #{dealerId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jiawawulian.dealermanage.domain.Dealer">
+    update dd_dealer
+    set LAT = #{lat,jdbcType=VARCHAR},
+      LON = #{lon,jdbcType=VARCHAR},
+      LOCATION = #{location,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR}
+    where DEALER_ID = #{dealerId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.jiawawulian.dealermanage.domain.Dealer">
+    <id column="DEALER_ID" jdbcType="VARCHAR" property="dealerId" />
+    <result column="LAT" jdbcType="VARCHAR" property="lat" />
+    <result column="LON" jdbcType="VARCHAR" property="lon" />
+    <result column="LOCATION" jdbcType="VARCHAR" property="location" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    DEALER_ID, LAT, LON, LOCATION, PHONE, USERNAME, PASSWORD
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dd_dealer
+    where DEALER_ID = #{dealerId,jdbcType=VARCHAR}
+  </select>
 
   <select id="selectByUsernameAndPassword" resultMap="BaseResultMap">
     select
